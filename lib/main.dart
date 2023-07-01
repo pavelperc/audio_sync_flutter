@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -37,10 +40,27 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
+  double _currentSliderValue = 0;
 
   void _incrementCounter() {
     setState(() {
       _counter++;
+    });
+  }
+
+  final ScrollController _controller = ScrollController();
+
+  @override
+  void initState() {
+    _controller.addListener(_scrollListener);
+    super.initState();
+  }
+
+  _scrollListener() {
+    var percent = 100 * _controller.position.pixels / _controller.position.maxScrollExtent;
+    // log("percent $percent");
+    setState(() {
+      _currentSliderValue = min(100, max(0, percent));
     });
   }
 
@@ -53,6 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Expanded(
             flex: 2,
             child: ListView(
+              controller: _controller,
               children: _getListData(),
             ),
           ),
@@ -60,7 +81,25 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Container(
               alignment: Alignment.center,
               color: Colors.green,
-              child: const Text('hello'),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Slider(
+                    activeColor: Colors.green[900],
+                    inactiveColor: Colors.white,
+                    value: _currentSliderValue,
+                    max: 100,
+                    onChanged: (double value) {
+                      var offset = _controller.position.maxScrollExtent * value / 100;
+                      _controller.jumpTo(offset);
+                      // setState(() {
+                      //   _currentSliderValue = value;
+                      // });
+                    },
+                  ),
+                  Text("${_currentSliderValue.round()} %")
+                ],
+              )
             ),
           ),
         ],
