@@ -16,8 +16,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
-        overlays: [SystemUiOverlay.bottom]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [SystemUiOverlay.bottom]);
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -67,40 +66,55 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
             flex: 2,
-            child: ListView(
-              controller: _controller,
-              children: _getListData(),
+            child: Stack(
+              children: [
+                ListView(
+                  controller: _controller,
+                  children: _getListData(),
+                ),
+                IgnorePointer(
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: <Color>[Colors.black, Colors.transparent, Colors.black]),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
           Expanded(
             child: Container(
-              alignment: Alignment.center,
-              color: Colors.green,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Slider(
-                    activeColor: Colors.green[900],
-                    inactiveColor: Colors.white,
-                    value: _currentSliderValue,
-                    max: 100,
-                    onChanged: (double value) {
-                      var offset = _controller.position.maxScrollExtent * value / 100;
-                      _controller.jumpTo(offset);
-                      // setState(() {
-                      //   _currentSliderValue = value;
-                      // });
-                    },
-                  ),
-                  Text("${_currentSliderValue.round()} %")
-                ],
-              )
-            ),
+                alignment: Alignment.center,
+                color: Colors.black,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Slider(
+                      activeColor: Colors.orange,
+                      thumbColor: Colors.white,
+                      inactiveColor: Colors.white24,
+                      value: _currentSliderValue,
+                      max: 100,
+                      onChanged: (double value) {
+                        var offset = _controller.position.maxScrollExtent * value / 100;
+                        _controller.jumpTo(offset);
+                        // setState(() {
+                        //   _currentSliderValue = value;
+                        // });
+                      },
+                    ),
+                    Text("${_currentSliderValue.round()} %")
+                  ],
+                )),
           ),
         ],
       ),
@@ -109,18 +123,20 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<Widget> _getListData() {
     List<Widget> widgets = [];
+    widgets.add(Container(height: 200));
     for (int i = 0; i < text.length; i++) {
       widgets.add(Container(
-        padding: EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-        color: (i % 2 == 0) ? Colors.amber[600] : Colors.amber[500],
+        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+        color: Colors.black,
         child: Center(
           child: Text(
             text[i],
-            style: GoogleFonts.lora(textStyle: TextStyle(fontSize: 20)),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
           ),
         ),
       ));
     }
+    widgets.add(Container(height: 200));
     return widgets;
   }
 }
