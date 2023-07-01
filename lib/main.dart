@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _scrollListener() {
     var percent = 100 * _controller.position.pixels / _controller.position.maxScrollExtent;
-    // log("percent $percent");
+    // print("pixels ${_controller.position.pixels}, maxScrollExtent ${_controller.position.maxScrollExtent}");
     setState(() {
       _currentSliderValue = min(100, max(0, percent));
     });
@@ -84,7 +84,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       gradient: LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
-                          colors: <Color>[Colors.black, Colors.transparent, Colors.black]),
+                          stops: [0, 0.45, 0.55, 1],
+                          colors: [Colors.black, Colors.transparent, Colors.transparent, Colors.black]),
                     ),
                   ),
                 ),
@@ -123,20 +124,31 @@ class _MyHomePageState extends State<MyHomePage> {
 
   List<Widget> _getListData() {
     List<Widget> widgets = [];
-    widgets.add(Container(height: 200));
-    for (int i = 0; i < text.length; i++) {
+    // widgets.add(Container(height: 200));
+    // for (int i = 0; i < text.length; i++) {
+    //   widgets.add(Container(
+    //     padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+    //     color: Colors.black,
+    //     child: Center(
+    //       child: Text(
+    //         text[i],
+    //         style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
+    //       ),
+    //     ),
+    //   ));
+    // }
+    var allText = "\n\n\n\n\n" + text.join("\n\n") + "\n\n\n\n";
       widgets.add(Container(
         padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         color: Colors.black,
         child: Center(
           child: Text(
-            text[i],
+            allText,
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
           ),
         ),
       ));
-    }
-    widgets.add(Container(height: 200));
+    // widgets.add(Container(height: 200));
     return widgets;
   }
 }
