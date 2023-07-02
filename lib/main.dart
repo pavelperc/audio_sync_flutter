@@ -71,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
-            flex: 3,
+            flex: 2,
             child: Stack(
               children: [
                 ListView(
@@ -95,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Expanded(
             child: Container(
                 alignment: Alignment.center,
-                color: Colors.green,
+                color: Colors.black,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
