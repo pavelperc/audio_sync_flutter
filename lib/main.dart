@@ -71,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
-            flex: 2,
+            flex: 3,
             child: Stack(
               children: [
                 ListView(
@@ -95,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Expanded(
             child: Container(
                 alignment: Alignment.center,
-                color: Colors.black,
+                color: Colors.green,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -113,7 +113,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         // });
                       },
                     ),
-                    Text("${_currentSliderValue.round()} %")
                   ],
                 )),
           ),
@@ -137,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
     //     ),
     //   ));
     // }
-    var allText = "\n\n\n\n\n" + text.join("\n\n") + "\n\n\n\n";
+    var allText = "\n\n\n\n\n" + text.join("\n\n") + "\n\n\n\n\n";
       widgets.add(Container(
         padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
         color: Colors.black,
