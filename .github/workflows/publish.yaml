@@ -16,4 +16,4 @@ jobs:
       - run: flutter pub get
       - uses: bluefireteam/flutter-gh-pages@v7
         with:
-          baseHref: /sync_audio_demo/
+          baseHref: /audio_sync_flutter/
