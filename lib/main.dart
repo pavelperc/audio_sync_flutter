@@ -69,18 +69,21 @@ class _MyHomePageState extends State<MyHomePage> {
             flex: 2,
             child: Stack(
               children: [
-                SingleChildScrollView(
+                ListView(
                   controller: _controller,
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-                    color: Colors.black,
-                    child: Center(
-                      child: Text(
-                        "\n\n\n\n\n\n\n\n" + text + "\n\n\n\n\n",
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
+                  children: [
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                      color: Colors.black,
+                      child: Center(
+                        child: Text(
+                          "\n\n\n\n\n\n\n\n" + text + "\n\n\n\n\n",
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
                 IgnorePointer(
                   child: Container(
@@ -95,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             1
                           ],
                           colors: [
-                            Colors.black,
+                            Colors.red,
                             Colors.transparent,
                             Colors.transparent,
                             Colors.black
