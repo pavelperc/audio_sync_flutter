@@ -38,14 +38,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
   double _currentSliderValue = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  bool _isVisible = true;
 
   final ScrollController _controller = ScrollController();
 
@@ -56,6 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   _scrollListener() {
+    _isVisible = false;
     var percent = 100 * _controller.position.pixels / _controller.position.maxScrollExtent;
     // print("pixels ${_controller.position.pixels}, maxScrollExtent ${_controller.position.maxScrollExtent}");
     setState(() {
@@ -84,8 +79,37 @@ class _MyHomePageState extends State<MyHomePage> {
                       gradient: LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
-                          stops: [0, 0.45, 0.55, 1],
-                          colors: [Colors.black, Colors.transparent, Colors.transparent, Colors.black]),
+                          stops: [
+                            0,
+                            0.45,
+                            0.55,
+                            1
+                          ],
+                          colors: [
+                            Colors.black,
+                            Colors.transparent,
+                            Colors.transparent,
+                            Colors.black
+                          ]),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _isVisible = false;
+                    });
+                  },
+                  child: Visibility(
+                    visible: _isVisible,
+                    child: Container(
+                      color: Colors.black,
+                      alignment: Alignment.center,
+                      padding: EdgeInsets.all(32),
+                      child: ClipRRect(
+                        child: Image.asset('assets/images/cover.jpg'),
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                      ),
                     ),
                   ),
                 ),
@@ -136,17 +160,18 @@ class _MyHomePageState extends State<MyHomePage> {
     //     ),
     //   ));
     // }
-    var allText = "\n\n\n\n\n" + text.join("\n\n") + "\n\n\n\n\n";
-      widgets.add(Container(
-        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-        color: Colors.black,
-        child: Center(
-          child: Text(
-            allText,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
-          ),
+    // var allText = "\n\n\n\n\n" + text.join("\n\n") + "\n\n\n\n\n";
+    var allText = "\n\n\n\n\n\n\n\n" + text + "\n\n\n\n\n";
+    widgets.add(Container(
+      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+      color: Colors.black,
+      child: Center(
+        child: Text(
+          allText,
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
         ),
-      ));
+      ),
+    ));
     // widgets.add(Container(height: 200));
     return widgets;
   }
