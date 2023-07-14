@@ -69,9 +69,18 @@ class _MyHomePageState extends State<MyHomePage> {
             flex: 2,
             child: Stack(
               children: [
-                ListView(
+                SingleChildScrollView(
                   controller: _controller,
-                  children: _getListData(),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                    color: Colors.black,
+                    child: Center(
+                      child: Text(
+                        "\n\n\n\n\n\n\n\n" + text + "\n\n\n\n\n",
+                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
+                      ),
+                    ),
+                  ),
                 ),
                 IgnorePointer(
                   child: Container(
@@ -143,36 +152,5 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
     );
-  }
-
-  List<Widget> _getListData() {
-    List<Widget> widgets = [];
-    // widgets.add(Container(height: 200));
-    // for (int i = 0; i < text.length; i++) {
-    //   widgets.add(Container(
-    //     padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-    //     color: Colors.black,
-    //     child: Center(
-    //       child: Text(
-    //         text[i],
-    //         style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
-    //       ),
-    //     ),
-    //   ));
-    // }
-    // var allText = "\n\n\n\n\n" + text.join("\n\n") + "\n\n\n\n\n";
-    var allText = "\n\n\n\n\n\n\n\n" + text + "\n\n\n\n\n";
-    widgets.add(Container(
-      padding: EdgeInsets.symmetric(vertical: 16, horizontal: 16),
-      color: Colors.black,
-      child: Center(
-        child: Text(
-          allText,
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.white),
-        ),
-      ),
-    ));
-    // widgets.add(Container(height: 200));
-    return widgets;
   }
 }
